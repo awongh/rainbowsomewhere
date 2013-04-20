@@ -40,12 +40,14 @@ class FindRainbow < ActiveRecord::Base
     #minutes / ( prob* 10 ) = rate of change
     #
     change = Array.new 
-    total_change = 0
+    
+    offset = 0
 
     forecast.minutely.data.each do |minute|
 
       if change.count() >= 30
         change.pop()
+        offset+=1
       end
 
       #p minute.precipProbability
@@ -55,24 +57,19 @@ class FindRainbow < ActiveRecord::Base
         next if ! precip
 
         if ( precip - change.first ).abs > 0.5 
+          minutes_to_rainbow = i
+
+          minutes_to_rainbow + offset
+
           #we have a winner. stop here
-          return i
+          return minutes_to_rainbow 
         end
 
-        v = precip - change.first
+        #v = precip - change.first
         #p "= " + v.to_s
       end
 
     end
     return_value
-
   end
-
-
-  def sunangle
-    puts "foo"
-
-  end
-
-
 end
