@@ -11,15 +11,26 @@ function init() {
         zoom:13,
         sliderStyle:"small"
     });
+    dojo.connect(map, "onLoad", initFunc);
 
     geocoder = new esri.dijit.Geocoder({
         map: map
     }, "search");
     geocoder.startup();
 
-    dojo.connect(map, "onLoad", afterMapLoad);
+//    dojo.connect(map, "onLoad", afterMapLoad);
 };
 
+function initFunc(map) {
+    dojo.connect(window, 'resize', map,map.resize);
+     if(navigator.geolocation){
+         navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
+         watchId = navigator.geolocation.watchPosition(showLocation, locationError);
+     }
+     else {
+         alert("Your browser needs to be schooled. Sucks.");
+     }
+} 
 
 function afterMapLoad(){
     var points = [[-122.45,37.75],[-122.45955,37.7511]];
@@ -41,6 +52,7 @@ function afterMapLoad(){
     });
 };
 
+
 function createSymbol(path, color){
     var markerSymbol = new esri.symbol.SimpleMarkerSymbol();
     markerSymbol.setPath(path);
@@ -48,6 +60,8 @@ function createSymbol(path, color){
     markerSymbol.setOutline(null);
     return markerSymbol;
 };
+
+
 
 dojo.ready(init);
 $(function () {
