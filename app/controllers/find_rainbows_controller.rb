@@ -5,19 +5,11 @@ class FindRainbowsController < ApplicationController
   end
 
   def find 
-    # @find_rainbows = FindRainbow.new( :location => {:longitude =>37.8267, :latitude=>-122.423} )
-    # @find_rainbows.location = f
-    @find_rainbows = FindRainbow.new
+    @find_rainbows = FindRainbow.new( params[:latitude], params[:longitude] )
 
-    @b = @find_rainbows.find
+    @output = @find_rainbows.find
 
-    puts @find_rainbows
-
-    puts @b
-
-    #binding.pry
-
-    render json: @find_rainbows
+    render json: @output
   end
 
   # GET /find_rainbows/1
