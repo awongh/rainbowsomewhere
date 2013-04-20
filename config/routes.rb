@@ -1,4 +1,5 @@
 Rainbowsomewhere::Application.routes.draw do
+<<<<<<< HEAD
 
 
   # The priority is based upon order of creation:
@@ -53,7 +54,7 @@ Rainbowsomewhere::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
@@ -64,4 +65,9 @@ Rainbowsomewhere::Application.routes.draw do
 
   
 
+=======
+
+  root :to => 'pages#index'
+
+>>>>>>> 99b614ad056e357d1ade0e05649e2f33dbd62fb4
 end
