@@ -51,9 +51,9 @@ function createSymbol(path, color){
 
 dojo.ready(init);
 $(function () {
-    $("#search_form").submit(function() {
+    $("#about").click(function() {
         $.ajax({
-            url: $(this).attr("action"),
+            url: '/find_rainbows/find',
             success: function(data) {
                 console.log(data);
             }
