@@ -1,0 +1,146 @@
+@import url(http://fonts.googleapis.com/css?family=Happy+Monkey);
+@import url(http://fonts.googleapis.com/css?family=Inconsolata:400,700);
+
+
+@front: rgba(106,50,218,.6);
+@back: rgba(50,106,218,.7);
+
+html, body {
+  height:100%;
+  width:100%;
+  margin:0;
+  padding:0;
+
+  .navbar .navbar-inner {
+    .brand {
+      font-size: 2em;
+      font-family: 'Happy Monkey', cursive;
+      color: blueviolet;
+      }
+    }
+  }
+
+
+
+#map {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding-top: 30px;
+  box-sizing: border-box;
+  }
+
+#search {
+  display: block;
+  position: absolute;
+  z-index: 9999;
+  top: 2px;
+  right: 74px;
+  }
+
+.flipper {
+  .media {
+    padding-left: 25px;
+
+    img.rainbow {
+      width: 70px;
+      vertical-align: center;
+      margin-top: 15px;
+      }
+    img.sunset {
+      width: 70px;
+      vertical-align: center;
+      margin-top: 10px;
+      }
+
+    h1.media-heading {
+      margin: 10px 0;
+      color: white;
+      font-family: 'Inconsolata', sans-serif;
+      line-height: 40px;
+      text-align: left;
+      }
+    
+    }
+  p {
+    color: white;
+    text-align: center;
+    }
+
+  h1, h3 {
+    color: white;
+    text-align: center;
+    }
+  }
+
+
+.forecasts {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+
+  .forecast {
+    margin: 10px 0;
+
+    .front {
+      background: @front;
+      }
+    .back {
+      background: @back;
+      }
+    }
+  }
+
+footer {
+  position: absolute;
+  bottom: 0px;
+  left: 15px;
+  }
+
+/* entire container, keeps perspective */
+.flip-container {
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  }
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  }
+
+.flip-container, .front, .back {
+  width: 300px;
+  height: 60px;
+  }
+
+/* flip speed goes here */
+.flipper {
+  -webkit-transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+  }
+
+/* hide back of pane during swap */
+.front, .back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  }
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  }
+
+/* back, initially hidden pane */
+.back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  }
