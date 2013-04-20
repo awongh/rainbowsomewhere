@@ -2,6 +2,10 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+require 'forecast_io'
+
+require 'typhoeus/adapters/faraday'
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -11,6 +15,15 @@ end
 
 module Rainbowsomewhere
   class Application < Rails::Application
+
+    silence_warnings do
+      begin
+        require 'pry'
+        IRB = Pry
+        rescue LoadError
+      end
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -58,5 +71,29 @@ module Rainbowsomewhere
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        :fixtures => true,
+        :view_specs => false,
+        :helper_specs => false,
+        :routing_specs => false,
+        :controller_specs => true,
+        :request_specs => true
+      g.fixture_replacement :factory_girl, :dir => "spec/factories"
+    end
+
+    Forecast::IO.configure do |configuration|
+      configuration.api_key = '3f0e934f638261775ac34a35bf98e2d3'
+    end
+
+    Rails.logger = Logger.new(STDOUT)
+
+    Faraday.default_connection.response :logger
+
+    Forecast::IO.connection = Faraday.new do |builder|
+      builder.adapter :typhoeus
+    end
+
   end
 end

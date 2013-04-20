@@ -6,8 +6,9 @@ class FindRainbowsController < ApplicationController
 
   def find 
     @find_rainbows = FindRainbow.new( params[:latitude], params[:longitude] )
+    @output = {}
 
-    @output = @find_rainbows.find
+    @output[:number_of_minutes] = @find_rainbows.find
 
     render json: @output
   end

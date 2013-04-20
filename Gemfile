@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+#source 'http://rubygems.org'
 
 gem 'rails', '3.2.12'
 
@@ -66,7 +67,7 @@ gem 'aws-s3'
 gem 'paperclip'
 
 #debug and testing
-gem 'pry'
+gem 'pry-rails'
 gem 'pry-doc'
 
 gem 'rspec'
@@ -75,3 +76,4 @@ gem 'cucumber'
 gem 'rest-client'
 gem 'forecast_io'
 
+gem 'typhoeus'

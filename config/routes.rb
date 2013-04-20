@@ -7,5 +7,4 @@ Rainbowsomewhere::Application.routes.draw do
       get :find
     end
   end
-
 end
